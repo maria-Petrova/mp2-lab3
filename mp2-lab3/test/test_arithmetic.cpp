@@ -18,10 +18,14 @@ TEST(arithmetic, can_calculate_expresion_in_a_postfix_notation) {
 }
 
 TEST(arithmetic, throws_when_input_invalid) {
-  string str1 = "(a+c";
+  string str1 = "(a+a";
   EXPECT_ANY_THROW(arithmetic::arithmetic_notation(str1));
 }
 
+TEST(arithmetic, throws_when_try_convert_empty_wtring) {
+  string str1 = "";
+  EXPECT_ANY_THROW(arithmetic::arithmetic_notation(str1));
+}
 TEST(arithmetic, throws_when_try_convert_empty_wtring) {
   string str1 = "";
   EXPECT_ANY_THROW(arithmetic::arithmetic_notation(str1));

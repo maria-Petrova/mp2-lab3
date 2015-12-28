@@ -152,6 +152,6 @@ double arithmetic::calculation(string str, double *values, int n) {
 
   double result = operand.pop();
   if (!operand.isEmpty())
-    throw std::exception("many operands");
+    throw std::exception("too many operands");
   return result;
 }
