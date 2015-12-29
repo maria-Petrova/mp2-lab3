@@ -14,6 +14,20 @@ int prior(char a) {
   }
 }
 
+void Insert(string str, map<char, double> &a) {
+  char curr;
+  for (int i = 0; i < str.length(); i++) {
+    curr = str[i];
+    if (((curr >= 0x41) && (curr <= 0x5A)) || ((curr >= 0x61) && (curr <= 0x7A))) 
+      if (!a.count(curr)) {
+		cout<<" "<<curr<<" = ";
+		cin>>a[curr];
+		cout<<endl;
+	  }
+    continue;
+    }
+}
+
 string arithmetic::arithmetic_notation(string str) {
   stack<char> operation;
   stack<char> operand;
@@ -64,54 +78,7 @@ string arithmetic::arithmetic_notation(string str) {
     return result;
 }
 
-double arithmetic::arithmetic_calculation(string str) {
-  if (str == "")
-    throw std::exception("Empty expression");
-  stack<double> operand;
-	
-  double leftOperand;
-  double rightOperand;
-
-  map<char, double> value;
-  char curr;
-
-  cout << "Input values: " << endl;
-  for (int i = 0; i < str.length(); i++) {
-    curr = str[i];
-    if (((curr >= 0x41) && (curr <= 0x5A)) || ((curr >= 0x61) && (curr <= 0x7A))) {
-      if (!value.count(curr)) {
-        cout << " " << curr << " = ";
-        cin >> value[curr];
-        cout << endl;
-      }
-    operand.push(value[curr]);
-    continue;
-  }
-
-    if (operand.isEmpty())
-      throw std::exception("does not match the number of operands");
-    rightOperand = operand.pop();
-    if (operand.isEmpty())
-		throw std::exception("does not match the number of operands");
-    leftOperand = operand.pop();
-
-    switch (curr) {
-      case '+': {
-        operand.push(leftOperand + rightOperand);
-        break;
-      }
-      case '-':{operand.push(leftOperand - rightOperand); break; }
-      case '*':{operand.push(leftOperand * rightOperand); break; }
-      case '/':{operand.push(leftOperand / rightOperand); break; }
-    }
-  }
-
-  double result = operand.pop();
-  if (!operand.isEmpty())
-    throw std::exception("many operands");
-  return result;
-}
-double arithmetic::calculation(string str, double *values, int n) {
+double arithmetic::calculation(string str,  map<char, double> a) {
   if (str == "")
     throw std::exception("Empty expression");
   stack<double> operand;
@@ -119,19 +86,12 @@ double arithmetic::calculation(string str, double *values, int n) {
   double leftOperand;
   double rightOperand;
 
-  map<char, double> value;
   char curr;
   int j = 0;
   for (int i = 0; i < str.length(); i++) {
     curr = str[i];
     if (((curr >= 0x41) && (curr <= 0x5A)) || ((curr >= 0x61) && (curr <= 0x7A))) {
-      if (j > n)
-        throw std::exception("A lot of values");
-      if (!value.count(curr)) {	
-        value[curr] = values[j];
-        j++;
-      }
-      operand.push(value[curr]);
+      operand.push(a[curr]);
       continue;
     }
 

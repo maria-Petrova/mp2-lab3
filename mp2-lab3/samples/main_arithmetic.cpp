@@ -1,6 +1,7 @@
 #include "arithmetic.h"
 #include <string>
 #include <iostream>
+#include <map>
 using namespace std;
 
 int main() {
@@ -11,8 +12,11 @@ int main() {
   cout << "   ";
   cin >> expression;
   try {
-    note = arithmetic::arithmetic_notation(expression);
-    result = arithmetic::arithmetic_calculation(note);
+	  note = arithmetic::arithmetic_notation(expression);
+	  cout<<"Input values"<<endl;
+	  map<char, double> a;
+	  Insert(note, a);
+	  result = arithmetic::calculation(note,a);
   }
   catch (...) {
     cout << "Error! Invalide input" << endl;
